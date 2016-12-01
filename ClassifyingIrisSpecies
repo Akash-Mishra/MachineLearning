@@ -38,4 +38,31 @@ print("X_test shape: {}".format(X_test.shape))
 print("y_test shape: {}".format(y_test.shape))
 
 
-# visualization of data to find abnormalities, if any
+# visualization of data to find abnormalities, if any. will have to do it later.
+# look into scatter plot methods
+
+
+
+#--------------------------------------------------------------------------
+#Building the k-nearest neighbour model
+from sklearn.neighbors import KNeighborsClassifier
+knn = KNeighborsClassifier(n_neighbors = 1)
+knn.fit(X_train, y_train)
+
+#---------------------------------------------------------------------------
+# Making Prediction
+import numpy as np
+X_new = np.array([[5, 2.9, 1, 0.2]])
+print("X_new.shape: {}".format(X_new.shape))
+
+# To make a prediction, we call the predict method of the knn onject
+prediction = knn.predict(X_new)
+print("Prediction: {}".format(prediction))
+print("Predicted target name: {}".format(iris_dataset["target_names"][prediction]))
+
+#-----------------------------------------------------------------------------
+# Evaluating the Model
+y_pred = knn.predict(X_test)
+print("Test set predictions:\n {}".format(y_pred))
+print("Test set score: {:.2f}".format(np.mean(y_pred == y_test)))
+print("Test set score: {:.2f}".format(knn.score(X_test, y_test)))
